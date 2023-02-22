@@ -8,7 +8,7 @@ void _user_data_api_func()
 {
     #define USER_DATA_PATH "/home/xiaole/share/work/_wasApp/user_data.ini"
 
-    LOG_WHITE("name2=[%s]\n", user_data_read("name2", USER_DATA_PATH));
+    LOG_WHITE("name=%s\n", user_data_read("name", USER_DATA_PATH));
     user_data_save("name2", "waszup2", USER_DATA_PATH);
     user_data_save("name4", "waszup4", USER_DATA_PATH);
 
@@ -38,8 +38,6 @@ void _log_color()
 
 int main()
 {
-    
-
     _user_data_api_func();
 
 

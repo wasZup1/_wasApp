@@ -49,7 +49,7 @@ const char *user_data_read(const char *name, const char *path)
     static char buf[16]  = {0};
     char cmd[256] = {0};
     
-    sprintf(cmd, "cat %s | grep %s | awk -F \"=\" '{print $2}'", path, name);
+    sprintf(cmd, "cat %s | grep \"%s=\" | awk -F \"=\" '{print $2}'", path, name);
     FILE *fp = popen(cmd, "r");
     if(fp == NULL)
     {
@@ -67,8 +67,13 @@ const char *user_data_read(const char *name, const char *path)
         buf[i] = ch;
         i ++;
     }
-
+    
     fclose(fp);
+
+    
+
+    if(buf[0] == 0) return NULL;
+    
     return buf;
 
 }
