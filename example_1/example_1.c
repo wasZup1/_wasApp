@@ -6,7 +6,7 @@
 
 void _user_data_api_func()
 {
-    #define USER_DATA_PATH "/home/xiaole/share/work/_wasApp/user_data.ini"
+    #define USER_DATA_PATH "./file/user_data.ini"
 
     LOG_WHITE("name=%s\n", user_data_read("name", USER_DATA_PATH));
     user_data_save("name2", "waszup2", USER_DATA_PATH);
