@@ -1,3 +1,13 @@
+/*************************************************************************
+ * @brief  用户数据读取和保存
+ * @date   2023-02-22 16:34
+ * @author xiaole
+ * @note   根据数据名称来存储数据， 所存储的数据可直接打开， 
+ * 通过"sed cat grep aws" 等命令和popen()函数来读取文件
+ * 如pwd=123456， 修改时会通过[sed -i "s/pwd=/pwd=123123/g file_path" ] 命令来修改
+ **************************************************************************/
+
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -67,7 +77,7 @@ const char *user_data_read(const char *name, const char *path)
         buf[i] = ch;
         i ++;
     }
-    
+
     fclose(fp);
 
     
@@ -89,7 +99,7 @@ int user_data_save(const char *name, const char *data, const char *path)
     char cmd[256] = {0};
 
     memset(cmd, 0, sizeof(cmd));
-    sprintf(cmd, "sed -i \"s/$(cat %s | grep \"%s\")/%s=%s/g\" %s", path, name, name, data, path);
+    sprintf(cmd, "sed -i \"s/$(cat %s | grep \"%s=\")/%s=%s/g\" %s", path, name, name, data, path);
     system(cmd);
 
 
