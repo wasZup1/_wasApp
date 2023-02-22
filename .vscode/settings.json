@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "wasapp.h": "c",
+        "cstdio": "c",
+        "user_data_api.h": "c"
+    }
+}
