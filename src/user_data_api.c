@@ -14,7 +14,7 @@
 
 #include "wasApp.h"
 
-bool is_data_exists(const char *name, const char *path)
+bool IsUserDataExists(const char *name, const char *path)
 {
     if(access(path, F_OK) != 0)
     {
@@ -43,18 +43,20 @@ bool is_data_exists(const char *name, const char *path)
 
 }
 
-int user_data_add(const char *name, const char *data, const char *path)
+int UserDataAdd(const char *name, const char *data, const char *path)
 {
     char cmd[256] = {0};
 
     memset(cmd, 0, sizeof(cmd));
     sprintf(cmd, "echo %s=%s >> %s", name, data, path);
     system(cmd);
+
+    return 1;
 }
 
-const char *user_data_read(const char *name, const char *path)
+const char *UserDataRead(const char *name, const char *path)
 {
-    if(!is_data_exists(name, path)) return NULL;
+    if(!IsUserDataExists(name, path)) return NULL;
 
     static char buf[16]  = {0};
     char cmd[256] = {0};
@@ -74,8 +76,8 @@ const char *user_data_read(const char *name, const char *path)
     {
         if(ch == '\n')  break;
         
-        buf[i] = ch;
-        i ++;
+        buf[i++] = ch;
+        // i++;
     }
 
     fclose(fp);
@@ -88,11 +90,11 @@ const char *user_data_read(const char *name, const char *path)
 
 }
 
-int user_data_save(const char *name, const char *data, const char *path)
+int UserDataSave(const char *name, const char *data, const char *path)
 {
-    if(!is_data_exists(name, path))
+    if(!IsUserDataExists(name, path))
     {
-        user_data_add(name, data, path);
+        UserDataAdd(name, data, path);
     }
 
 

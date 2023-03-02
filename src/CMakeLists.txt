@@ -4,6 +4,7 @@ message("CMAKE_BUILD_TYPE: " ${CMAKE_BUILD_TYPE})
 
 if(${CMAKE_BUILD_TYPE} STREQUAL  "Release")
 
+    
     set(CMAKE_C_COMPILER "arm-anykav500-linux-uclibcgnueabi-gcc")
     set(CMAKE_CXX_COMPILER "arm-anykav500-linux-uclibcgnueabi-g++")
 
@@ -11,7 +12,8 @@ if(${CMAKE_BUILD_TYPE} STREQUAL  "Release")
 
 endif()
 
-project(wasZup)
+message("CMAKE_C_COMPILER: " ${CMAKE_C_COMPILER})
+# project(wasZup)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 

@@ -9,7 +9,7 @@
  * @param  name 数据名
  * @param  path 文件路径 
  **************************************************************************/
-bool is_data_exists(const char *name, const char *path);
+bool IsUserDataExists(const char *name, const char *path);
 
 /*************************************************************************
  * @brief  读取数据
@@ -19,7 +19,7 @@ bool is_data_exists(const char *name, const char *path);
  * @param  name 数据名
  * @param  path 文件路径 
  **************************************************************************/
-const char *user_data_read(const char *name, const char *path);
+const char *UserDataRead(const char *name, const char *path);
 
 
 /*************************************************************************
@@ -31,7 +31,7 @@ const char *user_data_read(const char *name, const char *path);
  * @param  data 数据
  * @param  path 文件路径
  **************************************************************************/
-int user_data_save(const char *name, const char *data, const char *path);
+int UserDataSave(const char *name, const char *data, const char *path);
 
 
 

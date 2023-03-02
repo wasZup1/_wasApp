@@ -1,11 +1,75 @@
 
+#include <string.h>
+
 #include "func.h"
 #include "wasApp.h"
 
-void print_bin(int num)
+
+int bin_set_bit(int *num, int src, int bit)
+{
+    switch (bit)
+    {
+    case 0x000000FF:
+        *num |= (*num & bit) | src;
+        break;
+
+    case 0x0000FF00:
+        *num |= (*num & bit) | src << 8;
+        break;
+
+    case 0x00FF0000:
+        *num |= (*num & bit) | src << 16;
+        
+        break;   
+
+    case 0xFF000000:
+        *num |= (*num & bit) | src << 24;
+        break;
+    
+    default:
+        LOG_RED("bit %#08X is not avliable...\n", bit);
+        break;
+    }
+
+    return *num;
+}
+
+
+
+int bin_get_bit(int num, int bit)
+{
+    switch (bit)
+    {
+    case 0x000000FF:    /* 低8 */
+        num = (num & bit) >> 0;
+        break;
+
+    case 0x0000FF00:    /* 高8 */
+        num = (num & bit) >> 8;
+        break;
+
+    case 0x00FF0000:
+        num = (num & bit) >> 16;
+        break;   
+
+    case 0xFF000000:
+        num = (num & bit) >> 24;
+        break;
+    
+    default:
+        LOG_RED("bit %#08X is not avliable...\n", bit);
+        break;
+    }
+
+    return num;
+}
+
+char *bin_print(int num)
 {
 	int i, j, m = 0;	
-	char buf[] = "00000000 00000000 00000000 00000000\0";
+	static char buf[] = "00000000 00000000 00000000 00000000\0";
+	memset(buf, 0, sizeof(buf));
+
 	unsigned char *p = (unsigned char *)&num + 3; // p先指向num后面第3个字节的地址，即num的最高位字节地址
 
 	for (i = 0; i < 4; i++) 			// 依次处理4个字节(32位）
@@ -28,7 +92,8 @@ void print_bin(int num)
 		m++;
 		
 	}
-	LOG_WHITE("[%d]\t二进制输出:%s\n", num, buf);
+	// LOG_WHITE("[%d]\t二进制输出:%s\n", num, buf);
+	return buf;
 
 
 	#if (0)

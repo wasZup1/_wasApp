@@ -4,15 +4,8 @@
 
 #include "include/wasApp.h"
 
-void _user_data_api_func()
-{
-    #define USER_DATA_PATH "./file/user_data.ini"
 
-    LOG_WHITE("name=%s\n", user_data_read("name", USER_DATA_PATH));
-    user_data_save("name2", "waszup2", USER_DATA_PATH);
-    user_data_save("name4", "waszup4", USER_DATA_PATH);
 
-}
 
 void _log_color()
 {
@@ -34,12 +27,30 @@ void _log_color()
     LOG_B_CYAN("Cyan\n");
 }
 
+void _number()
+{
+    unsigned int num = 0b0000;
 
+    LOG_WHITE("%s\n", bin_print(num));
+
+
+    LOG_WHITE("s 0x000000FF %s\n", bin_print(bin_set_bit(&num, 0x12, 0x000000FF)));
+    LOG_WHITE("s 0x0000FF00 %s\n", bin_print(bin_set_bit(&num, 0x45, 0x0000FF00)));
+    LOG_WHITE("s 0x00FF0000 %s\n", bin_print(bin_set_bit(&num, 0x78, 0x00FF0000)));
+    LOG_WHITE("s 0xFF000000 %s\n", bin_print(bin_set_bit(&num, 0xF5, 0xFF000000)));
+
+
+    /* 获取 */
+    LOG_WHITE("g 0x000000FF [%x]-[%d] %s\n", bin_get_bit(num, 0x000000FF), bin_get_bit(num, 0x000000FF), bin_print(bin_get_bit(num, 0x000000FF)));
+    LOG_WHITE("g 0x0000FF00 [%x]-[%d] %s\n", bin_get_bit(num, 0x0000FF00), bin_get_bit(num, 0x0000FF00), bin_print(bin_get_bit(num, 0x0000FF00)));
+    LOG_WHITE("g 0x00FF0000 [%x]-[%d] %s\n", bin_get_bit(num, 0x00FF0000), bin_get_bit(num, 0x00FF0000), bin_print(bin_get_bit(num, 0x00FF0000)));
+    LOG_WHITE("g 0xFF000000 [%x]-[%d] %s\n", bin_get_bit(num, 0xFF000000), bin_get_bit(num, 0xFF000000), bin_print(bin_get_bit(num, 0xFF000000)));
+
+}
 
 int main()
 {
-    _user_data_api_func();
-
+    _number();
 
 
     return 0;
