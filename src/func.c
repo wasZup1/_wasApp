@@ -92,7 +92,6 @@ char *bin_print(int num)
 		m++;
 		
 	}
-	// LOG_WHITE("[%d]\t二进制输出:%s\n", num, buf);
 	return buf;
 
 

@@ -28,7 +28,7 @@ make_clean(){
 
 main () {
     case ${1} in
-        "-Example")
+        "-Ex")
             make_all Example
 
             rm -rf output/*
@@ -36,7 +36,7 @@ main () {
             cp $buildDir/*.a    output/ -vp
 
             ;;
-        "-Release")
+        "-Re")
             make_all Release
 
             rm -rf output/*
@@ -54,9 +54,9 @@ main () {
             echo "####################### MENU #######################"
             echo "$0                MENU"
             echo ""
-            echo "$0 -Example     编译例子 电脑可直接运行"
-            echo "$0 -Release     编译例子 使用的时安凯工具链， 在板子上运行"
-            echo "$0 -clean             删除编译生成的文件"
+            echo "$0 -Ex            编译例子 电脑可直接运行"
+            echo "$0 -Re            编译例子 使用的时安凯工具链， 在板子上运行"
+            echo "$0 -clean         删除编译生成的文件"
             # echo "$0 -bk            打包备份"
             echo "###################################################"
 
@@ -64,5 +64,9 @@ main () {
     esac
 
 }
+
+# 更新时间
+buf=$(cat wasApp.h | grep "build time:" | awk '{print $4}')
+sed -i "s/${buf}/$(date +%Y%m%d%H%M)/" wasApp.h
 
 main $1 $2

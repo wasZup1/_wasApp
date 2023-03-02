@@ -1,7 +1,7 @@
 #ifndef __WASAPP_H__
 #define __WASAPP_H__
 
-/* build time: 202303021154 */
+/* build time: 202303021121 */
 
 #include "log_info.h"
 #include "func.h"
@@ -12,3 +12,4 @@
 
 
 #endif /* __WASAPP_H__ */
+
