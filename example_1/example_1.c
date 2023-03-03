@@ -29,22 +29,14 @@ void _log_color()
 
 void _number()
 {
-    unsigned int num = 0b0000;
+    int num1 = 0;
 
-    LOG_WHITE("%s\n", bin_print(num));
+    bin_set_bit(&num1, 13, 0x0F00);
 
-
-    LOG_WHITE("s 0x000000FF %s\n", bin_print(bin_set_bit(&num, 0x12, 0x000000FF)));
-    LOG_WHITE("s 0x0000FF00 %s\n", bin_print(bin_set_bit(&num, 0x45, 0x0000FF00)));
-    LOG_WHITE("s 0x00FF0000 %s\n", bin_print(bin_set_bit(&num, 0x78, 0x00FF0000)));
-    LOG_WHITE("s 0xFF000000 %s\n", bin_print(bin_set_bit(&num, 0xF5, 0xFF000000)));
+    LOG_WHITE("%s, %d\n", bin_print(num1), num1);
+    // LOG_WHITE("%s, %d\n", bin_print(bin_get_bit(num1, 0xFF)), bin_get_bit(num1, 0xFF));
 
 
-    /* 获取 */
-    LOG_WHITE("g 0x000000FF [%x]-[%d] %s\n", bin_get_bit(num, 0x000000FF), bin_get_bit(num, 0x000000FF), bin_print(bin_get_bit(num, 0x000000FF)));
-    LOG_WHITE("g 0x0000FF00 [%x]-[%d] %s\n", bin_get_bit(num, 0x0000FF00), bin_get_bit(num, 0x0000FF00), bin_print(bin_get_bit(num, 0x0000FF00)));
-    LOG_WHITE("g 0x00FF0000 [%x]-[%d] %s\n", bin_get_bit(num, 0x00FF0000), bin_get_bit(num, 0x00FF0000), bin_print(bin_get_bit(num, 0x00FF0000)));
-    LOG_WHITE("g 0xFF000000 [%x]-[%d] %s\n", bin_get_bit(num, 0xFF000000), bin_get_bit(num, 0xFF000000), bin_print(bin_get_bit(num, 0xFF000000)));
 
 }
 

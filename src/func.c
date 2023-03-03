@@ -5,41 +5,110 @@
 #include "wasApp.h"
 
 
-int bin_set_bit(int *num, int src, int bit)
+bool bin_set_bit(int *num, long src, const long bit)
 {
+	if(src < 0)
+	{
+		LOG_RED("err: num is invalid '%ld' < '0'\n", src);
+		return false;
+	}
+
+	if(bit < src)
+	{
+		LOG_RED("err: num is too large  '%ld' > '%ld'\n", src, bit);
+		return false;
+	}
+
+
     switch (bit)
     {
-    case 0x000000FF:
-        *num |= (*num & bit) | src;
-        break;
+        case 0x0000000F:			
+			*num = (*num & ~bit) | src ;
+			break;
 
-    case 0x0000FF00:
-        *num |= (*num & bit) | src << 8;
-        break;
+        case 0x000000F0:
+			*num = (*num & ~bit) | src  << 4;
+			break;
 
-    case 0x00FF0000:
-        *num |= (*num & bit) | src << 16;
+        case 0x00000F00:
+			*num = (*num & ~bit) | src  << 8;
+			break;
+
+        case 0x0000F000:
+			*num = (*num & ~bit) | src  << 12;
+			break;	
+
+        case 0x000F0000:
+			*num = (*num & ~bit) | src  << 16;
+			break;	
+
+        case 0x00F00000:
+			*num = (*num & ~bit) | src  << 20;
+			break;	
+
+        case 0x0F000000:
+			*num = (*num & ~bit) | src  << 24;
+			break;	
+
+        case 0xF0000000:
+			*num = (*num & ~bit) | src  << 28;
+			break;
+
+        case 0x000000FF:
+			*num = (*num & ~bit) | src ;
+			break;
+
+        case 0x0000FF00:
+			*num = (*num & ~bit) | src  << 8;
+			break;
+
+        case 0x00FF0000:
+			*num = (*num & ~bit) | src  << 16;
+			break;   
+
+        case 0xFF000000:
+			*num = (*num & ~bit) | src  << 24;
+			break;
         
-        break;   
-
-    case 0xFF000000:
-        *num |= (*num & bit) | src << 24;
-        break;
-    
-    default:
-        LOG_RED("bit %#08X is not avliable...\n", bit);
-        break;
+        default:
+			LOG_RED("bit %#08lX is not avliable...\n", bit);
+			break;
     }
 
-    return *num;
+	return true;
 }
 
 
 
-int bin_get_bit(int num, int bit)
+int bin_get_bit(int num, const int bit)
 {
     switch (bit)
     {
+	case 0x0000000F:
+        num = (num & bit);
+        break;
+	case 0x000000F0:
+        num = (num & bit) >> 4;
+        break;		
+	case 0x00000F00:
+        num = (num & bit) >> 8;
+        break;
+	case 0x0000F000:
+        num = (num & bit) >> 12;
+        break;
+	case 0x000F0000:
+        num = (num & bit) >> 16;
+        break;	
+	case 0x00F00000:
+        num = (num & bit) >> 20;
+        break;
+	case 0x0F000000:
+        num = (num & bit) >> 24;
+        break;
+	case 0xF0000000:
+        num = (num & bit) >> 28;
+        break;
+
     case 0x000000FF:    /* 低8 */
         num = (num & bit) >> 0;
         break;

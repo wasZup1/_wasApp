@@ -21,8 +21,11 @@ make_all(){
 make_lib(){
     cd $projPath/src
 
+    ./build.sh -Ex
     cp -vp $projPath/src/output/*.a $projPath/example_1/lib
     cp -vp $projPath/src/output/*.h $projPath/example_1/include
+
+    cd -
     
 }
 
@@ -42,12 +45,13 @@ run_exe(){
 main () {
     case ${1} in
         "-all")
+
+            make_lib
             make_all
             run_exe
 
             ;;
         "-lib")
-            make_lib
             
             ;;
         "-clean")

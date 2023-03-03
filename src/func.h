@@ -6,26 +6,26 @@
 #include <stdbool.h>
 
 /*************************************************************************
- * @brief  按位赋值
+ * @brief  按位赋值, 负数好像每弄好...
  * @date   2023-03-02 10:13
  * @author xiaole
- * @return 赋值之后的新值
+ * @return true/false   
  * @param  num 给谁赋值
  * @param  src 赋值多少
  * @param  bit 赋值哪些 
- * 低八[0x000000FF], 高八[0x0000FF00], [0x00FF0000], [0xFF000000]
+ * 低八[0x000000FF], 高八[0x0000FF00], [0x00FF0000], [0xFF000000]...
  * @note   eg: bin_set_bit(&num, 0x45, 0x0000FF00), 将num 的高八位赋值为0x45
  **************************************************************************/
-int bin_set_bit(int *num, int src, int bit);
+bool bin_set_bit(int *num, long src, const long bit);
 
 /*************************************************************************
  * @brief  按位取值
  * @date   2023-03-02 10:20
  * @author xiaole
- * @return 
+ * @return 取得的数值
  * @param num 取谁的
  * @param bit 取哪些
- * 低八[0x000000FF], 高八[0x0000FF00], [0x00FF0000], [0xFF000000]
+ * 低八[0x000000FF], 高八[0x0000FF00], [0x00FF0000], [0xFF000000]...
  **************************************************************************/
 int bin_get_bit(int num, int bit);
 
